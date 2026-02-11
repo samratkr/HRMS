@@ -10,6 +10,7 @@ import {
   CalendarCheck,
 } from "lucide-react";
 import { startOfDay } from "date-fns";
+import { Link } from "wouter";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
 export default function Dashboard() {
@@ -140,22 +141,22 @@ export default function Dashboard() {
                 to handle daily operations.
               </p>
               <div className="grid grid-cols-1 gap-3">
-                <a href="/employees" className="block w-full">
+                <Link href="/employees" className="block w-full">
                   <div className="p-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors cursor-pointer border border-white/10 flex items-center justify-between">
                     <span className="font-medium text-sm">
                       Add New Employee
                     </span>
                     <Users className="w-4 h-4 opacity-70" />
                   </div>
-                </a>
-                <a href="/attendance" className="block w-full">
+                </Link>
+                <Link href="/attendance" className="block w-full">
                   <div className="p-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors cursor-pointer border border-white/10 flex items-center justify-between">
                     <span className="font-medium text-sm">
                       Mark Today's Attendance
                     </span>
                     <CalendarCheck className="w-4 h-4 opacity-70" />
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

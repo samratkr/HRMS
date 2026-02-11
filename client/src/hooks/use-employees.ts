@@ -8,7 +8,7 @@ export function useEmployees() {
   return useQuery({
     queryKey: [api.employees.list.path],
     queryFn: async () => {
-      const res = await fetch(api.employees.list.path);
+      const res = await fetch(buildUrl(api.employees.list.path));
       if (!res.ok) throw new Error("Failed to fetch employees");
       return api.employees.list.responses[200].parse(await res.json());
     },
@@ -36,7 +36,7 @@ export function useCreateEmployee() {
   return useMutation({
     mutationFn: async (data: InsertEmployee) => {
       const validated = api.employees.create.input.parse(data);
-      const res = await fetch(api.employees.create.path, {
+      const res = await fetch(buildUrl(api.employees.create.path), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(validated),
@@ -160,7 +160,7 @@ export function useDepartments() {
   return useQuery({
     queryKey: [api.departments.list.path],
     queryFn: async () => {
-      const res = await fetch(api.departments.list.path);
+      const res = await fetch(buildUrl(api.departments.list.path));
       if (!res.ok) throw new Error("Failed to fetch departments");
       return res.json();
     },
@@ -171,7 +171,7 @@ export function useJobTitles() {
   return useQuery({
     queryKey: [api.jobTitles.list.path],
     queryFn: async () => {
-      const res = await fetch(api.jobTitles.list.path);
+      const res = await fetch(buildUrl(api.jobTitles.list.path));
       if (!res.ok) throw new Error("Failed to fetch job titles");
       return res.json();
     },

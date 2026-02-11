@@ -4,6 +4,7 @@ from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
 

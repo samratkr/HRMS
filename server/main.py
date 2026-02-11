@@ -14,6 +14,20 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://hrms-drab-alpha.vercel.app",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 def seed_reference_data(db: Session):
     for name in ["Engineering", "HR", "Sales", "Marketing"]:
         if not db.query(models.Department).filter_by(name=name).first():

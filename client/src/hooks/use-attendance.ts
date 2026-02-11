@@ -12,7 +12,7 @@ export function useAttendance(date?: Date) {
   return useQuery({
     queryKey: [api.attendance.list.path, dateStr],
     queryFn: async () => {
-      const url = new URL(api.attendance.list.path, window.location.origin);
+      const url = new URL(buildUrl(api.attendance.list.path));
       if (dateStr) {
         url.searchParams.append("date", dateStr);
       }
@@ -31,7 +31,7 @@ export function useMarkAttendance() {
   return useMutation({
     mutationFn: async (data: InsertAttendance) => {
       const validated = api.attendance.mark.input.parse(data);
-      const res = await fetch(api.attendance.mark.path, {
+      const res = await fetch(buildUrl(api.attendance.mark.path), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(validated),

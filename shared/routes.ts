@@ -24,6 +24,10 @@ export const errorSchemas = {
   }),
 };
 
+export const BASE_URL = import.meta.env.DEV
+  ? "http://localhost:5000"
+  : import.meta.env.VITE_API_URL || "";
+
 export const api = {
   departments: {
     list: {
@@ -124,7 +128,7 @@ export function buildUrl(
   path: string,
   params?: Record<string, string | number | undefined>,
 ): string {
-  let url = path;
+  let url = `${BASE_URL}${path}`;
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
@@ -134,8 +138,13 @@ export function buildUrl(
       }
     });
 
+    const queryParams = { ...params };
+    Object.keys(params).forEach((key) => {
+      if (path.includes(`:${key}`)) delete queryParams[key];
+    });
+
     const query = new URLSearchParams(
-      Object.entries(params).filter(([, v]) => v !== undefined) as [
+      Object.entries(queryParams).filter(([, v]) => v !== undefined) as [
         string,
         string,
       ][],

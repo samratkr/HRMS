@@ -64,6 +64,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { BASE_URL } from "@shared/routes";
 
 type Department = { id: number; name: string };
 type JobTitle = { id: number; name: string };
@@ -80,11 +81,11 @@ export default function Employees() {
   const [jobTitles, setJobTitles] = useState<JobTitle[]>([]);
 
   useEffect(() => {
-    fetch("/api/departments")
+    fetch(`${BASE_URL}/api/departments`)
       .then((res) => res.json())
       .then((data) => setDepartments(data));
 
-    fetch("/api/job-titles")
+    fetch(`${BASE_URL}/api/job-titles`)
       .then((res) => res.json())
       .then((data) => setJobTitles(data));
   }, []);
